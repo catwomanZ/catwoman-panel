@@ -4,12 +4,12 @@
 
 <br><br>
 
-<a href="#"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=24&duration=3000&pause=1000&color=FF1493&center=true&vCenter=true&width=620&lines=Welcome+to+Catwoman+Panel;Free+Xray+Panel+on+Railway;VLESS+%C2%B7+Trojan+%C2%B7+VMess;Powered+by+Python+and+Xray" alt="Catwoman Panel"></a>
+<a href="#"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=24&duration=3000&pause=1000&color=FF1493&center=true&vCenter=true&width=620&lines=Welcome+to+Catwoman+Panel;Free+Xray+Panel+on+Railway;VLESS+%C2%B7+Trojan+%C2%B7+VMess;Powered+by+Python" alt="Catwoman Panel"></a>
 
-<h1>Catwoman Panel 🐾</h1>
+<h1>Catwoman Panel</h1>
 
-<p><b>پنل قدرتمند، رایگان و اوپن‌سورس بر پایه‌ی پایتون و Xray</b><br>
-ساخت بی‌نهایت کانفیگ VLESS، Trojan و VMess تنها با یک کلیک روی Railway</p>
+<p><b>پنل ساخت کانفیگ، رایگان و اوپن‌سورس با پایتون</b><br>
+اجرای هسته Xray روی پلتفرم Railway تنها با چند کلیک</p>
 
 <img src="https://img.shields.io/badge/Version-1.0.0-ff1493?style=for-the-badge" alt="Version">
 <img src="https://img.shields.io/badge/Price-Free-16a34a?style=for-the-badge" alt="Free">
@@ -20,8 +20,8 @@
 
 <br><br>
 
-<a href="../../fork"><img src="https://img.shields.io/badge/Fork%20%D9%88%20%D9%86%D8%B5%D8%A8%20%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-ff1493?style=for-the-badge&logo=github&logoColor=white" alt="Fork"></a>
-<a href="https://railway.com/new"><img src="https://img.shields.io/badge/Deploy%20on%20Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Deploy on Railway"></a>
+<a href="https://railway.app/new"><img src="https://img.shields.io/badge/Deploy%20on%20Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Deploy on Railway"></a>
+<a href="../../fork"><img src="https://img.shields.io/badge/Fork%20Project-ff1493?style=for-the-badge&logo=github&logoColor=white" alt="Fork"></a>
 
 <br><br>
 
@@ -35,29 +35,61 @@
 <br>
 
 > [!NOTE]
-> **Catwoman Panel** کاملاً رایگانه. نیازی به سرور مجازی (VPS) یا دانش کدنویسی نداری. پروژه رو Fork کن، روی Railway دیپلوی کن و در کمتر از چند دقیقه پنل اختصاصی خودت رو با دامنه‌ی رایگان تحویل بگیر.
-
-> [!IMPORTANT]
-> **قدرت گرفته از پایتون:** بک‌اند این پنل کاملاً با پایتون نوشته شده که بهینه‌ترین حالت ارتباط با هسته‌ی Xray رو فراهم می‌کنه. مصرف رم و پردازنده به شدت پایینه و روی اکانت‌های رایگان Railway به بهترین شکل کار می‌کنه.
+> **Catwoman Panel** یک اسکریپت سبک پایتونی است که بدون نیاز به سرور (VPS) و تنظیمات پیچیده، روی **Railway** دیپلوی میشه و کانفیگ‌های Xray رو برای شما می‌سازه.
 
 <br>
+
+<a id="features"></a>
+## ✨ امکانات
+
+- 🚂 **نصب رایگان و ابری:** دیپلوی مستقیم روی Railway بدون نیاز به کارت بانکی یا سرور.
+- 🐍 **سبک و سریع:** استفاده از پایتون برای مدیریت بی‌نقص هسته‌ی Xray.
+- ⚙️ **تنوع پروتکل‌ها:** ساخت کانفیگ‌های VLESS ،Trojan و VMess.
+- 🛡️ **بدون محدودیت:** کاملاً اوپن‌سورس و رایگان برای استفاده شخصی.
+
+<br>
+
+<a id="install"></a>
+## 🛠️ آموزش نصب در ۱ دقیقه
+
+نصب این پنل به هیچ دانش برنامه‌نویسی یا کار با ترمینال نیاز نداره:
+
+1. وارد [Railway](https://railway.app) بشید و پروژه رو دیپلوی کنید (یا پروژه رو تو گیت‌هاب خودتون **Fork** کنید و از اونجا روی ریلوی بیارید بالا).
+2. تو صفحه پروژه‌تون در Railway، برید تو تب **Settings** و بخش **Networking**.
+3. روی **Generate Domain** کلیک کنید تا بهتون یه دامنه‌ی رایگان بده.
+4. پورت (Port) رو روی **`8080`** تنظیم کنید.
+
+🎉 **تمام! پنل شما آمادست و از طریق دامنه‌ای که ساختید در دسترسه.**
+
+<br>
+
+<a id="protocols"></a>
+## 🌍 پروتکل‌های پشتیبانی شده
+
+| پروتکل | وضعیت |
+|---|:---:|
+| **VLESS** | 🟢 فعال |
+| **Trojan** | 🟢 فعال |
+| **VMess** | 🟢 فعال |
+
+کانفیگ‌های خروجی با تمام کلاینت‌های استاندارد مثل **v2rayNG**، **V2Box**، **Hiddify** و **NekoBox** سازگار هستند.
+
+<br>
+
+<a id="support"></a>
+## 💬 پشتیبانی و ارتباط با سازنده
+
+اگه تو نصب مشکلی داشتی، ایده جدیدی به ذهنت رسید یا خواستی فیدبک بدی، می‌تونی مستقیم تو تلگرام با من در ارتباط باشی:
 
 <div align="center">
 
-| 🐍<br>**پایتون بیس** | ⚡<br>**هسته Xray** | 🛡️<br>**پروتکل‌ها** | 🚂<br>**مخصوص Railway** |
-|:---:|:---:|:---:|:---:|
-| سبک، سریع و بهینه | قدرتمندترین انجین ضد فیلتر | VLESS, Trojan, VMess | دیپلوی بدون دردسر |
+<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Telegram-@Catwoman__ZaHra-ff1493?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Support"></a>
 
+<br><br>
+<b>اگه این پروژه به کارت اومد، یه ⭐ (Star) اون بالا بهش بده! 😻</b>
+
+<br><br>
+<sub><b>Catwoman Panel</b> · طراحی شده با 🩷 و پایتون برای اینترنت آزاد</sub>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff1493,100:000000&height=120&section=footer" width="100%" alt="">
 </div>
-
-<br>
-
-## 🚀 شروع سریع و معماری
-
-```mermaid
-flowchart LR
-    A["Fork Repo<br/>GitHub"] --> B["Deploy App<br/>Railway"]
-    B --> C["Python Backend<br/>Starts"]
-    C --> D["Xray Core<br/>Configured"]
-    D --> E(("Ready to Use<br/>Domain Built"))
-    style E fill:#ff1493,stroke:#000,color:#fff
