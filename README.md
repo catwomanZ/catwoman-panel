@@ -1,15 +1,17 @@
 <div align="center">
 
-<!-- تیتر اصلی متحرک با فونت گیمینگ نئونی -->
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=900&size=55&duration=3000&pause=1000&color=FF1493&center=true&vCenter=true&width=800&height=120&lines=CATWOMAN+PANEL;ADVANCED+XRAY+CORE;NO+LIMITS.+NO+VPS." alt="Catwoman Panel Header">
+<!-- بنر نئونی سایبرپانک اختصاصی با بک‌گراند مشکی/نئونی و درخشش لیزری -->
+<img src="https://capsule-render.vercel.app/api?type=slice&color=gradient&customColorList=0:050014,15:ff007f,35:050014,50:00ffff,65:050014,85:ff007f,100:090014&height=260&section=header&text=CATWOMAN%20PANEL&fontSize=55&fontColor=ffffff&fontAlignY=45&animation=fadeIn&stroke=ff007f&strokeWidth=4" width="100%" alt="Catwoman Cyberpunk Neon Banner">
 
-<!-- افکت ترمینال هکری زیر تیتر -->
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&duration=4000&pause=500&color=00FFFF&center=true&vCenter=true&width=700&height=50&lines=System.Initialize(Python_Backend);Loading_Protocols:[VLESS,+Trojan,+VMess];Deploying_on_Railway_Cloud...;Connection_Established_Successfully_>" alt="Terminal Setup">
+<br>
+
+<!-- کنسول هکری سایبرپانک با درخشش فیروزه‌ای -->
+<a href="https://t.me/Catwoman_ZaHra"><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=20&duration=2500&pause=500&color=FF007F&center=true&vCenter=true&width=750&height=50&lines=%E2%9A%A1+NEXT-GEN+XRAY+PROXY+PANEL+%E2%9A%A1;%F0%9F%94%A5+PYTHON+BACKEND+%2B+RAILWAY+CLOUD;%F0%9F%92%8E+VLESS+%C2%B7+TROJAN+%C2%B7+VMESS;%F0%9F%9B%A1%EF%B8%8F+NO+VPS+REQUIRED+%C2%B7+100%25+FREE" alt="Cyberpunk Typing SVG"></a>
 
 <p><b>پنل حرفه‌ای، رایگان و متن‌باز ساخت کانفیگ بر پایه‌ی پایتون</b><br>
 بدون نیاز به سرور (VPS) · نصب مستقیم و سریع روی Railway</p>
 
-<!-- بج‌های نئونی -->
+<!-- بج‌های نئونی گیمینگ -->
 <a href="https://railway.app/new"><img src="https://img.shields.io/badge/Deploy-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=FF1493" alt="Railway"></a>
 <img src="https://img.shields.io/badge/Backend-Python-3776AB?style=for-the-badge&logo=python&logoColor=00FFFF" alt="Python">
 <img src="https://img.shields.io/badge/Core-Xray-7c4dff?style=for-the-badge" alt="Xray">
@@ -157,7 +159,7 @@
 
 <sub><b>Catwoman Panel</b> · طراحی شده برای اینترنت آزاد</sub>
 
-<!-- خط نئونی پایین صفحه -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=ff1493&height=4&width=100%" alt="Neon Line">
+<!-- خط نئونی لیزری انتهای صفحه -->
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0:00ffff,50:ff007f,100:00ffff&height=4&width=100%" alt="Laser Line">
 
 </div>
