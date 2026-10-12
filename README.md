@@ -1,19 +1,17 @@
 <div align="center">
 
-<!-- بنر نئونی صورتی متحرک -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:ff007f,50:ff1493,100:09090e&height=220&section=header&text=🐾%20CATWOMAN%20PANEL%20🐾&fontSize=50&fontColor=ffffff&fontAlignY=35&animation=fadeIn" width="100%" alt="Catwoman Panel Header">
+<!-- تیتر اصلی متحرک با فونت گیمینگ نئونی -->
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=900&size=55&duration=3000&pause=1000&color=FF1493&center=true&vCenter=true&width=800&height=120&lines=CATWOMAN+PANEL;ADVANCED+XRAY+CORE;NO+LIMITS.+NO+VPS." alt="Catwoman Panel Header">
 
-<br>
-
-<!-- متن تایپی متحرک صورتی -->
-<a href="https://t.me/Catwoman_ZaHra"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=22&duration=2400&pause=800&color=FF1493&center=true&vCenter=true&width=650&lines=One-Click+Free+Xray+Panel+on+Railway;VLESS+%C2%B7+Trojan+%C2%B7+VMess;Powered+by+Python+%2B+Xray+Core;Fast+%C2%B7+Secure+%C2%B7+No+VPS+Required" alt="Catwoman Panel"></a>
+<!-- افکت ترمینال هکری زیر تیتر -->
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&duration=4000&pause=500&color=00FFFF&center=true&vCenter=true&width=700&height=50&lines=System.Initialize(Python_Backend);Loading_Protocols:[VLESS,+Trojan,+VMess];Deploying_on_Railway_Cloud...;Connection_Established_Successfully_>" alt="Terminal Setup">
 
 <p><b>پنل حرفه‌ای، رایگان و متن‌باز ساخت کانفیگ بر پایه‌ی پایتون</b><br>
 بدون نیاز به سرور (VPS) · نصب مستقیم و سریع روی Railway</p>
 
 <!-- بج‌های نئونی -->
 <a href="https://railway.app/new"><img src="https://img.shields.io/badge/Deploy-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=FF1493" alt="Railway"></a>
-<img src="https://img.shields.io/badge/Backend-Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/Backend-Python-3776AB?style=for-the-badge&logo=python&logoColor=00FFFF" alt="Python">
 <img src="https://img.shields.io/badge/Core-Xray-7c4dff?style=for-the-badge" alt="Xray">
 <a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Support-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Support"></a>
 
@@ -153,13 +151,13 @@
 
 <br><br>
 
-<b>اگر این پروژه به کارت اومد، حتماً با دادن یک ⭐ (Star) حمایتم کن! 🐾</b>
+<b>اگر این پروژه به کارت اومد، حتماً با دادن یک ⭐ (Star) حمایتم کن!</b>
 
 <br><br>
 
 <sub><b>Catwoman Panel</b> · طراحی شده برای اینترنت آزاد</sub>
 
-<!-- بنر انتها -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:09090e,50:ff1493,100:ff007f&height=100&section=footer" width="100%" alt="Footer">
+<!-- خط نئونی پایین صفحه -->
+<img src="https://capsule-render.vercel.app/api?type=rect&color=ff1493&height=4&width=100%" alt="Neon Line">
 
 </div>
