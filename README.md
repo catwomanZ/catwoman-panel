@@ -1,7 +1,9 @@
 <div align="center">
 
 <!-- بنر نئونی صورتی متحرک -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:ff007f,50:ff1493,100:09090e&height=220&section=header&text=🐾%20CATWOMAN%20PANEL%20🐾&fontSize=50&fontColor=ffffff&fontAlignY=35&animation=fadeIn" width="100%" alt="Catwoman Panel Header">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:ff007f,50:ff1493,100:09090e&height=220&section=header
+text=%20CATWOMAN%20PANEL%20
+&fontSize=50&fontColor=ffffff&fontAlignY=35&animation=fadeIn" width="100%" alt="Catwoman Panel Header">
 
 <br>
 
@@ -96,12 +98,70 @@
 
 ## 🔮 معماری و نحوه کارکرد
 
-```mermaid
-flowchart LR
-    A["👤 User App"] -- "VLESS / Trojan / VMess" --> B["☁️ Railway Cloud"]
-    B -- "Port 8080" --> C["🐍 Python Backend"]
-    C --> D["⚡ Xray Core"]
-    D --> E(("🌐 Free Internet"))
-    style B fill:#ff1493,stroke:#fff,color:#fff
-    style C fill:#1a1a2e,stroke:#ff1493,color:#fff
-    style D fill:#7c4dff,stroke:#fff,color:#fff
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="20%"><b>👤 اپلیکیشن کاربر</b><br><sub>V2Box / v2rayNG</sub></td>
+<td align="center" width="5%">➔</td>
+<td align="center" width="25%"><b>☁️ سرویس Railway</b><br><sub>Port 8080</sub></td>
+<td align="center" width="5%">➔</td>
+<td align="center" width="25%"><b>🐍 بک‌اند پایتون</b><br><sub>Xray Handler</sub></td>
+<td align="center" width="5%">➔</td>
+<td align="center" width="20%"><b>🌐 اینترنت آزاد</b><br><sub>اتصال امن</sub></td>
+</tr>
+</table>
+
+</div>
+
+<br>
+
+<a id="install"></a>
+## 🛠️ آموزش نصب (زیر ۱ دقیقه)
+
+نصب پروژه بسیار ساده است و نیاز به هیچ دانش فنی ندارد:
+
+1. روی دکمه **Deploy on Railway** در بالای همین صفحه کلیک کنید (یا ریپو را دیپلوی کنید).
+2. در پنل Railway وارد بخش **Settings** و سپس **Networking** شوید.
+3. روی گزینه‌ی **Generate Domain** کلیک کرده و پورت را روی <code>8080</code> بگذارید.
+
+🎉 **تمام! پنل شما آمادست.**
+
+<br>
+
+<a id="protocols"></a>
+## 🌍 پروتکل‌های پشتیبانی شده
+
+این پنل کانفیگ‌های خروجی را برای نرم‌افزارهایی مانند **v2rayNG**، **V2Box**، **Hiddify** و **NekoBox** تولید می‌کند:
+
+| پروتکل | وضعیت | کاربرد |
+|---|:---:|---|
+| **VLESS** | 🟢 | بالاترین سرعت و پایداری روی تمام اپراتورها |
+| **Trojan** | 🟢 | شبیه‌سازی ترافیک HTTPS و دور زدن فیلترینگ |
+| **VMess** | 🟢 | سازگاری با تمامی نرم‌افزارهای قدیمی و جدید |
+
+<br>
+
+<a id="support"></a>
+## 💬 پشتیبانی و ارتباط با سازنده
+
+اگر سوالی داری، مشکلی پیش اومده یا ایده جدیدی داری، از طریق تلگرام با من در ارتباط باش:
+
+<div align="center">
+
+<br>
+
+<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Telegram-@Catwoman__ZaHra-ff1493?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Direct"></a>
+
+<br><br>
+
+<b>اگر این پروژه به کارت اومد، حتماً با دادن یک ⭐ (Star) حمایتم کن! 🐾</b>
+
+<br><br>
+
+<sub><b>Catwoman Panel</b> · طراحی شده برای اینترنت آزاد</sub>
+
+<!-- بنر انتها -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:09090e,50:ff1493,100:ff007f&height=100&section=footer" width="100%" alt="Footer">
+
+</div>
