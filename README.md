@@ -1,33 +1,34 @@
 <div align="center">
 
-<!-- ==================== BANNER SECTION ==================== -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:05000a,25:1a002c,50:ff007f,75:7b00ff,100:00f3ff&height=280&section=header&text=CATWOMAN%20PANEL&fontSize=68&fontColor=ffffff&fontAlignY=38&animation=twinkle&stroke=ff007f&strokeWidth=4" width="100%" alt="Catwoman Gaming Banner">
+<img src="catwoman-logo.jpg" width="300" alt="Catwoman Panel Logo">
+<br><br>
 
+<a href="https://t.me/Catwoman_ZaHra"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=22&duration=2600&pause=700&color=FF1493&center=true&vCenter=true&width=620&lines=Free+Xray+Panel+on+Railway;Powered+by+Python+Backend;VLESS+%C2%B7+Trojan+%C2%B7+VMess;Catwoman+Panel" alt="Catwoman Panel"></a>
+
+<h1>Catwoman Panel</h1>
+
+<p><b>پنل ساخت کانفیگ رایگان، سریع و متن‌باز بر پایه‌ی پایتون</b><br>
+یک سرویس کامل: پنل و هسته‌ی قدرتمند Xray، با اجرای مستقیم روی Railway</p>
+
+<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Telegram-Catwoman%20Panel-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"></a>
+<img src="https://img.shields.io/badge/Version-1.0.0-ff1493?style=for-the-badge" alt="Version">
+<img src="https://img.shields.io/badge/Price-Free-16a34a?style=for-the-badge" alt="Free">
 <br>
-
-<!-- HUD Gaming Status Bar -->
-<a href="https://t.me/Catwoman_ZaHra"><img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=900&size=20&duration=2500&pause=800&color=00F3FF&center=true&vCenter=true&width=780&height=50&lines=%E2%96%B6+SYSTEM+STATUS%3A+ONLINE+%5B100%25+STABLE%5D;%E2%96%B6+POWERED+BY+PYTHON+%2B+XRAY+CORE;%E2%96%B6+PROTOCOLS%3A+VLESS+%C2%B7+TROJAN+%C2%B7+VMESS;%E2%96%B6+DEPLOYMENT%3A+ONE-CLICK+RAILWAY+CLOUD" alt="HUD Gaming Console"></a>
-
-<p><b>⚡ پنل ساخت کانفیگ اختصاصی، قدرتمند و رایگان بر پایه‌ی پایتون ⚡</b><br>
-اجرای مستقیم روی بسترهای ابری Railway بدون نیاز به خرید سرور (VPS)</p>
-
-<!-- Neon Gaming Badges -->
-<a href="https://railway.app/new"><img src="https://img.shields.io/badge/Deploy-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=FF007F" alt="Railway"></a>
-<img src="https://img.shields.io/badge/Backend-Python_3.11-3776AB?style=for-the-badge&logo=python&logoColor=00F3FF" alt="Python">
-<img src="https://img.shields.io/badge/Core-Xray_Latest-7c4dff?style=for-the-badge" alt="Xray">
-<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Telegram-@Catwoman__ZaHra-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Support"></a>
+<img src="https://img.shields.io/badge/Deploy-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Railway">
+<img src="https://img.shields.io/badge/Backend-Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/Core-Xray-7c4dff?style=for-the-badge" alt="Xray">
 
 <br><br>
 
-<!-- Action Buttons -->
-<a href="https://railway.app/new"><img src="https://img.shields.io/badge/🎮%20DEPLOY%20NOW%20ON%20RAILWAY-ff007f?style=for-the-badge" alt="Deploy"></a>
-<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/⚡%20TELEGRAM%20SUPPORT-05000a?style=for-the-badge&logo=telegram&logoColor=00f3ff" alt="Telegram"></a>
+<a href="../../fork"><img src="https://img.shields.io/badge/Fork%20%D9%88%20%D9%86%D8%B5%D8%A8%20%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-ff1493?style=for-the-badge&logo=github&logoColor=white" alt="Fork"></a>
+<a href="https://railway.app/new"><img src="https://img.shields.io/badge/Deploy%20on%20Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Deploy on Railway"></a>
 
 <br><br>
 
-<a href="#features"><b>امکانات</b></a> &nbsp;·&nbsp;
-<a href="#install"><b>آموزش نصب</b></a> &nbsp;·&nbsp;
+<a href="#intro"><b>معرفی</b></a> &nbsp;·&nbsp;
+<a href="#install"><b>نصب</b></a> &nbsp;·&nbsp;
 <a href="#protocols"><b>پروتکل‌ها</b></a> &nbsp;·&nbsp;
+<a href="#features"><b>امکانات</b></a> &nbsp;·&nbsp;
 <a href="#support"><b>پشتیبانی</b></a>
 
 </div>
@@ -35,60 +36,80 @@
 <br>
 
 > [!NOTE]
-> **Catwoman Panel** یک پنل فوق‌العاده سریع و سبک است که با پایتون توسعه داده شده. این پروژه بدون نیاز به سرورهای گران‌قیمت، روی اکانت رایگان Railway دیپلوی می‌شود و کانفیگ‌های Xray را در اختیارتان قرار می‌دهد.
+> **Catwoman Panel** کاملاً رایگانه. ریپو رو Fork کن، روی Railway بساز و در کمتر از ۲ دقیقه پنل ساخت کانفیگ خودت رو تحویل بگیر. بدون VPS، بدون ترمینال، بدون تنظیم دستی.
 
 <br>
 
-<!-- HUD Overview Table -->
+> [!IMPORTANT]
+> **چرا پایتون؟** بک‌اند این پروژه به صورت کامل با پایتون نوشته شده که کمترین مصرف منابع را روی سرورهای Railway دارد و بهینه‌ترین ارتباط را با هسته Xray برقرار می‌کند.
+
+<br>
+
 <div align="center">
 
-| 🐍<br>**PYTHON BACKEND** | ⚡<br>**XRAY CORE** | 🔮<br>**NEON PROTOCOLS** | ☁️<br>**FREE RAILWAY** |
-|:---:|:---:|:---:|:---:|
-| بک‌اند سبک و بهینه | اتصال پایدار و ضد فیلتر | VLESS / Trojan / VMess | ساخت رایگان و بدون هزینه |
+| 🐍<br>**پایتون بیس** | ⚡<br>**هسته‌ی Xray** | 🛡️<br>**۳ پروتکل** | 🚂<br>**اجرا در ریلوی** | 🚀<br>**نصب یک‌کلیکی** |
+|:---:|:---:|:---:|:---:|:---:|
+| سبک و سریع | VLESS, Trojan, VMess | کاملاً رایگان | بدون نیاز به VPS | بدون تنظیمات دستی |
 
 </div>
 
 <br>
 
+<a id="intro"></a>
+## 🚀 شروع سریع و معماری
+
+```mermaid
+flowchart LR
+    A["Fork<br/>GitHub"] --> B["Deploy<br/>Railway"]
+    B --> C["Python<br/>Backend"]
+    C --> D["Domain<br/>port 8080"]
+    D --> E(("Ready"))
+    style E fill:#ff1493,stroke:#a855f7,color:#fff
+```
+
+<br>
+
 <a id="features"></a>
-## 🔮 امکانات پنل (Features)
+## ✨ امکانات
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### 🚀 نصب ابری و رایگان
-- دیپلوی فوری روی **Railway**
-- بدون نیاز به سرور مجازی (VPS)
-- بدون نیاز به کارت اعتباری و هزینه ماهانه
-- دریافت دامنه‌ی اختصاصی رایگان
+### 🚂 نصب بدون دردسر
+- Fork و Deploy، بدون ویرایش حتی یک فایل
+- بک‌اند پایتون و هسته‌ی Xray در **یک سرویس**
+- بدون نیاز به VPS یا نصب ابزارهای جانبی
+- همه چیز روی پورت `8080` تنظیم می‌شود
 
 </td>
 <td width="50%" valign="top">
 
-### ⚙️ کانفیگ‌های هوشمند
-- ساخت کانفیگ قدرتمند **VLESS**
-- ساخت کانفیگ امن **Trojan**
-- ساخت کانفیگ کلاسیک **VMess**
-- اتصال سریع به برنامه‌های V2Ray
+### ⚙️ کانفیگ‌های حرفه‌ای
+- پشتیبانی کامل از پروتکل **VLESS**
+- پشتیبانی از پروتکل مخفی **Trojan**
+- پشتیبانی از پروتکل **VMess**
+- سازگاری کامل با تمام اپراتورها
 
 </td>
 </tr>
 <tr>
 <td valign="top">
 
-### 🐍 سرعت و بهینه‌سازی
-- توسعه داده شده با **Python**
-- مصرف بسیار پایین منابع (RAM & CPU)
-- مدیریت هوشمند هسته‌ی Xray Core
+### 🐍 بک‌اند قدرتمند پایتون
+- کدنویسی بهینه و بسیار سبک
+- مصرف بسیار پایین رم (RAM) در Railway
+- اجرای دستورات هسته بدون هیچ تاخیر (Delay)
+- راه‌اندازی سریع در کمتر از چند ثانیه
 
 </td>
-<td width="50%" valign="top">
+<td valign="top">
 
-### 🛡️ امنیت و پایداری
-- ترافیک تماماً رمزنگاری شده
-- مخفی‌سازی آی‌پی اصلی سرور
-- پایدار در سخت‌ترین شرایط فیلترینگ
+### 🔒 امنیت و اتصال
+- مسیرهای ایمن و کانفیگ‌های قوی
+- عدم نیاز به ثبت اطلاعات شخصی
+- پنهان ماندن آی‌پی اصلی سرور
+- سازگار با V2Box، v2rayNG و Hiddify
 
 </td>
 </tr>
@@ -96,72 +117,105 @@
 
 <br>
 
-## 🎮 معماری شبکه (System Flow)
+<a id="install"></a>
+## 🛠️ آموزش نصب قدم به قدم
+
+> [!TIP]
+> زمان نصب حدود **۱ تا ۲ دقیقه** است. فقط یک اکانت [GitHub](https://github.com) و یک اکانت [Railway](https://railway.app) لازم داری.
+
+<details open>
+<summary><b>مرحله‌ی ۱ &nbsp;·&nbsp; Fork کردن ریپو</b></summary>
+
+<br>
+
+1. بالای همین صفحه روی **Fork** بزن.
+2. اسم ریپو رو هر چی خواستی بذار و **Create fork** رو بزن.
+3. حالا یک نسخه از پروژه توی اکانت خودت داری. هیچ فایلی رو لازم نیست تغییر بدی.
+
+</details>
+
+<details open>
+<summary><b>مرحله‌ی ۲ &nbsp;·&nbsp; ساخت سرویس روی Railway</b></summary>
+
+<br>
+
+1. وارد [Railway](https://railway.app) شو و بزن **New Project**.
+2. گزینه‌ی **Deploy from GitHub repo** رو انتخاب کن و ریپوی Fork شده‌ی خودت رو بزن.
+3. Railway خودش شروع به ساختن (Build) می‌کنه.
+
+</details>
+
+<details open>
+<summary><b>مرحله‌ی ۳ &nbsp;·&nbsp; دامنه و پورت (مهم)</b></summary>
+
+<br>
+
+1. در پنل ریلوی برو به بخش **Settings ← Networking**.
+2. بزن **Generate Domain** تا یک دامنه‌ی رایگان بهت بده.
+3. پورت را دقیقاً روی عدد زیر تنظیم کن:
+
+```text
+8080
+```
+
+</details>
+
+<details open>
+<summary><b>مرحله‌ی ۴ &nbsp;·&nbsp; تبریک! پنل آماده است</b></summary>
+
+<br>
+
+اکنون می‌توانید آدرس دامنه‌ای که Railway به شما داده است را باز کنید و از ساخت کانفیگ‌های خود لذت ببرید!
+
+</details>
+
+<br>
+
+<a id="protocols"></a>
+## 🌍 پروتکل‌ها و اپلیکیشن‌ها
+
+| پروتکل | وضعیت | توضیحات کاربردی |
+|---|:---:|---|
+| **VLESS** | 🟢 | سبک‌ترین پروتکل، بدون نیاز به رمزنگاری اضافه، مناسب برای دور زدن فیلترینگ مدرن. |
+| **Trojan** | 🟢 | مخفی‌سازی ترافیک به شکل ترافیک استاندارد وب (HTTPS)، بسیار مقاوم. |
+| **VMess** | 🟢 | پروتکل کلاسیک، سازگار با اکثر کلاینت‌های قدیمی و جدید. |
+
+**اپ‌های پشتیبانی‌شده:**
+- اندروید: `v2rayNG` · `V2Box` · `Hiddify` · `NekoBox`
+- آی‌او‌اس (iOS): `V2Box` · `Streisand` · `Foxray`
+- ویندوز: `v2rayN` · `NekoRay`
+
+<br>
+
+<a id="support"></a>
+## 💬 پشتیبانی و کانال رسمی
 
 <div align="center">
 
-<table>
-<tr>
-<td align="center" width="20%"><b>📱 Client App</b><br><sub>v2rayNG / V2Box</sub></td>
-<td align="center" width="5%">➔</td>
-<td align="center" width="25%"><b>☁️ Railway Edge</b><br><sub>Port 8080</sub></td>
-<td align="center" width="5%">➔</td>
-<td align="center" width="25%"><b>🐍 Python Core</b><br><sub>Xray Handler</sub></td>
-<td align="center" width="5%">➔</td>
-<td align="center" width="20%"><b>🌐 Free Internet</b><br><sub>Secure Connection</sub></td>
-</tr>
-</table>
+<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Telegram-@Catwoman__ZaHra-ff1493?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Channel"></a>
+
+<br><br>
+
+آپدیت‌ها، رفع مشکلات و پشتیبانی مستقیم از طریق تلگرام<br>
+**[Catwoman_ZaHra](https://t.me/Catwoman_ZaHra)**
+
+اگه این پروژه به کارت اومد، با یک **Star ⭐** اون بالا ازم حمایت کن.
 
 </div>
 
 <br>
 
-<a id="install"></a>
-## 🛠️ آموزش نصب (راهنمای سریع)
+## ⚖️ مجوز و قدردانی
 
-نصب این پروژه کمتر از ۱ دقیقه زمان می‌بره و به هیچ ترمینالی نیاز نداره:
-
-1. روی دکمه **DEPLOY NOW ON RAILWAY** در بالای همین صفحه کلیک کنید.
-2. در پنل Railway وارد تب **Settings** و سپس بخش **Networking** شوید.
-3. روی گزینه‌ی **Generate Domain** کلیک کنید و پورت (Port) را روی <code>8080</code> قرار دهید.
-
-🎉 **تکمیل شد! پنل شما روی آدرس دامنه‌ای که ساختید بالا می‌آید.**
+- استفاده و نصب این پروژه **رایگانه**.
+- این پروژه با پایتون و استفاده از هسته‌ی قدرتمند [Xray-core](https://github.com/XTLS/Xray-core) توسعه داده شده است.
 
 <br>
-
-<a id="protocols"></a>
-## 🌍 پروتکل‌های پشتیبانی شده
-
-این پنل کانفیگ‌های خروجی را برای تمامی برنامه‌ها (**v2rayNG**, **V2Box**, **Hiddify**, **NekoBox**) آماده می‌کند:
-
-| پروتکل | وضعیت | ویژگی اصلی |
-|---|:---:|---|
-| **VLESS** | 🟢 | بالاترین سرعت و پایداری روی تمام اپراتورها |
-| **Trojan** | 🟢 | شبیه‌سازی ترافیک استاندارد HTTPS |
-| **VMess** | 🟢 | سازگاری کامل با تمامی دستگاه‌ها |
-
-<br>
-
-<a id="support"></a>
-## 💬 پشتیبانی و ارتباط با سازنده
-
-برای دریافت راهنمایی، گزارش مشکل یا پیشنهاد، مستقیماً تو تلگرام پیام بده:
 
 <div align="center">
 
-<br>
+<sub><b>Catwoman Panel</b> · طراحی شده با 🩷 برای اینترنت آزاد</sub>
 
-<a href="https://t.me/Catwoman_ZaHra"><img src="https://img.shields.io/badge/Telegram-@Catwoman__ZaHra-ff007f?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Direct"></a>
-
-<br><br>
-
-<b>اگه از این پنل خوشت اومد، با دادن یک ⭐ (Star) از پروژه حمایت کن! 🔥</b>
-
-<br><br>
-
-<sub><b>Catwoman Panel</b> · طراحی شده برای اینترنت آزاد</sub>
-
-<!-- Laser Neon Line -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=0:00f3ff,50:ff007f,100:00f3ff&height=4&width=100%" alt="Neon Laser Line">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff1493,50:000000,100:ff1493&height=110&section=footer" width="100%" alt="">
 
 </div>
