@@ -1,9 +1,7 @@
 <div align="center">
 
 <!-- بنر نئونی صورتی متحرک -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:ff007f,50:ff1493,100:09090e&height=220&section=header
-text=%20CATWOMAN%20PANEL%20
-&fontSize=50&fontColor=ffffff&fontAlignY=35&animation=fadeIn" width="100%" alt="Catwoman Panel Header">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:ff007f,50:ff1493,100:09090e&height=220&section=header&text=🐾%20CATWOMAN%20PANEL%20🐾&fontSize=50&fontColor=ffffff&fontAlignY=35&animation=fadeIn" width="100%" alt="Catwoman Panel Header">
 
 <br>
 
