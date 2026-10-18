@@ -1,94 +1,42 @@
 {% extends "base.html" %}
-{% block title %}Edit - {{ panel_name }}{% endblock %}
+{% block title %}ویرایش {{ user.username }} — {{ panel_name }}{% endblock %}
+{% block header_title %}ویرایش سرویس{% endblock %}
+{% block header_subtitle %}تنظیمات و محدودیت‌های {{ user.username }}{% endblock %}
 {% block content %}
-
-<h1 class="page-title">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-    ویرایش {{ user.username }}
-</h1>
-
-<form method="POST" action="/users/edit/{{ user.id }}">
-    <div class="form-section">
-        <div class="form-section-title">اطلاعات اصلی</div>
-
-        <div class="form-group">
-            <label class="form-label">نام کاربری</label>
-            <input type="text" name="username" class="form-control" value="{{ user.username }}" required>
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">توضیحات</label>
-            <textarea name="description" class="form-control">{{ user.description }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">وضعیت</label>
-            <select name="status" class="form-control">
-                <option value="active" {% if user.status == 'active' %}selected{% endif %}>فعال</option>
-                <option value="disabled" {% if user.status == 'disabled' %}selected{% endif %}>غیرفعال</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-section">
-        <div class="form-section-title">محدودیت‌ها</div>
-
-        <div class="form-group">
-            <label class="form-label">حجم (گیگابایت)</label>
-            <input type="number" name="data_limit" class="form-control" value="{{ data_limit_gb }}" min="0" step="0.1">
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">مدت زمان (روز)</label>
-            <input type="number" name="expiry_days" class="form-control" value="{{ remaining_days }}" min="0">
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">محدودیت IP</label>
-            <input type="number" name="ip_limit" class="form-control" value="{{ user.ip_limit }}" min="0">
-        </div>
-    </div>
-
-    <div class="form-section">
-        <div class="form-section-title">تنظیمات پروتکل</div>
-
-        <div class="form-group">
-            <label class="form-label">پروتکل</label>
-            <select name="protocol" class="form-control">
-                <option value="vless" {% if user.protocol == 'vless' %}selected{% endif %}>VLESS</option>
-                <option value="vmess" {% if user.protocol == 'vmess' %}selected{% endif %}>VMess</option>
-                <option value="trojan" {% if user.protocol == 'trojan' %}selected{% endif %}>Trojan</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">Flow</label>
-            <select name="flow" class="form-control">
-                <option value="" {% if not user.flow %}selected{% endif %}>هیچکدام</option>
-                <option value="xtls-rprx-vision" {% if user.flow == 'xtls-rprx-vision' %}selected{% endif %}>XTLS Vision</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-section">
-        <div class="form-section-title">اطلاعات تکمیلی</div>
-
-        <div class="form-group">
-            <label class="form-label">آیدی تلگرام</label>
-            <input type="text" name="telegram_id" class="form-control" value="{{ user.telegram_id }}">
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">یادداشت</label>
-            <textarea name="note" class="form-control">{{ user.note }}</textarea>
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-        ذخیره تغییرات
-    </button>
-    <a href="/users" class="btn btn-ghost btn-block" style="margin-top: 10px;">بازگشت</a>
-</form>
-
+<section class="view-page active">
+  <div class="page-intro"><div class="intro-copy"><div class="eyebrow"><i></i> USER PROFILE / EDIT MODE</div><h1>ویرایش {{ user.username }}</h1><p>اطلاعات سرویس را تغییر دهید؛ داده‌های مصرف‌شده حفظ می‌شوند.</p></div><div class="module-seal"><small>EDIT</small><b>{{ user.username[:2]|upper }}</b><em>{{ user.protocol|upper }}</em></div></div>
+  <form method="post" action="/users/edit/{{ user.id }}" id="userForm" class="forge-grid">
+    <article class="panel forge-form">
+      <div class="section-heading"><div><small>USER IDENTITY</small><h2>اطلاعات اصلی</h2></div><span>شناسه: {{ user.id[:8] }}</span></div>
+      <div class="form-grid">
+        <label class="control"><span>نام کاربری *</span><div class="control-input"><svg><use href="#i-user"/></svg><input name="username" value="{{ user.username }}" required maxlength="64" data-preview-name></div></label>
+        <label class="control"><span>توضیحات</span><div class="control-input"><svg><use href="#i-edit"/></svg><input name="description" value="{{ user.description or '' }}" maxlength="200"></div></label>
+        <label class="control"><span>وضعیت</span><div class="control-input"><svg><use href="#i-power"/></svg><select name="status"><option value="active" {% if user.status == 'active' %}selected{% endif %}>فعال</option><option value="disabled" {% if user.status != 'active' %}selected{% endif %}>غیرفعال</option></select></div></label>
+      </div>
+      <div class="section-heading spaced"><div><small>LIMITS & ACCESS</small><h2>محدودیت‌ها</h2></div><span>مصرف فعلی: {{ format_bytes(user.data_used) }}</span></div>
+      <div class="form-grid">
+        <label class="control"><span>حجم (گیگابایت)</span><div class="control-input suffix"><svg><use href="#i-database"/></svg><input type="number" name="data_limit" value="{{ data_limit_gb }}" min="0" step="0.1" data-preview-volume><b>GB</b></div></label>
+        <label class="control"><span>مدت زمان باقی‌مانده</span><div class="control-input suffix"><svg><use href="#i-chart"/></svg><input type="number" name="expiry_days" value="{{ remaining_days }}" min="0" data-preview-days><b>DAY</b></div></label>
+        <label class="control"><span>محدودیت IP</span><div class="control-input suffix"><svg><use href="#i-shield"/></svg><input type="number" name="ip_limit" value="{{ user.ip_limit }}" min="0" data-preview-ip><b>IP</b></div></label>
+      </div>
+      <div class="section-heading spaced"><div><small>CONNECTION PROFILE</small><h2>تنظیمات پروتکل</h2></div><span>اعمال پس از ذخیره</span></div>
+      <div class="form-grid">
+        <label class="control"><span>پروتکل</span><div class="control-input"><svg><use href="#i-link"/></svg><select name="protocol" data-preview-protocol><option value="vless" {% if user.protocol == 'vless' %}selected{% endif %}>VLESS</option><option value="vmess" {% if user.protocol == 'vmess' %}selected{% endif %}>VMess</option><option value="trojan" {% if user.protocol == 'trojan' %}selected{% endif %}>Trojan</option></select></div></label>
+        <label class="control"><span>Flow</span><div class="control-input"><svg><use href="#i-server"/></svg><select name="flow"><option value="" {% if not user.flow %}selected{% endif %}>هیچ‌کدام</option><option value="xtls-rprx-vision" {% if user.flow == 'xtls-rprx-vision' %}selected{% endif %}>XTLS Vision</option></select></div></label>
+      </div>
+      <div class="section-heading spaced"><div><small>OPTIONAL DATA</small><h2>اطلاعات تکمیلی</h2></div><span>اختیاری</span></div>
+      <div class="form-grid">
+        <label class="control"><span>آیدی تلگرام</span><div class="control-input"><svg><use href="#i-send"/></svg><input name="telegram_id" value="{{ user.telegram_id or '' }}" placeholder="@username یا شناسه عددی"></div></label>
+        <label class="control full"><span>یادداشت ادمین</span><div class="control-input textarea-control"><svg><use href="#i-edit"/></svg><textarea name="note" maxlength="500">{{ user.note or '' }}</textarea></div></label>
+      </div>
+      <div class="form-actions"><a class="secondary-action" href="/users">انصراف</a><button class="forge-submit" type="submit"><svg><use href="#i-check"/></svg> ذخیره تغییرات</button></div>
+    </article>
+    <aside class="panel forge-preview">
+      <div class="preview-orbit"><i></i><span></span><div><svg><use href="#i-edit"/></svg></div></div>
+      <small>EXISTING SERVICE</small><div class="preview-id" data-preview-output-name>{{ user.username }}</div><p class="preview-note">مصرف ثبت‌شده با ویرایش سرویس حذف نمی‌شود.</p>
+      <div class="preview-specs"><div><span>پروتکل</span><b data-preview-output-protocol>{{ user.protocol|upper }}</b></div><div><span>حجم</span><b data-preview-output-volume>{% if data_limit_gb %}{{ data_limit_gb|round(1) }} GB{% else %}نامحدود{% endif %}</b></div><div><span>اعتبار</span><b data-preview-output-days>{% if remaining_days %}{{ remaining_days }} روز{% else %}نامحدود{% endif %}</b></div><div><span>IP</span><b data-preview-output-ip>{% if user.ip_limit %}{{ user.ip_limit }}{% else %}نامحدود{% endif %}</b></div></div>
+      <div class="preview-secure"><svg><use href="#i-shield"/></svg><span><b>{% if user.status == 'active' %}سرویس فعال{% else %}سرویس غیرفعال{% endif %}</b><small>{{ format_bytes(user.data_used) }} مصرف ثبت‌شده</small></span></div>
+    </aside>
+  </form>
+</section>
 {% endblock %}

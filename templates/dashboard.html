@@ -1,63 +1,64 @@
 {% extends "base.html" %}
-{% block title %}Dashboard - {{ panel_name }}{% endblock %}
+{% block title %}داشبورد — {{ panel_name }}{% endblock %}
+{% block header_title %}مرکز فرمان CatWoman{% endblock %}
+{% block header_subtitle %}وضعیت زنده کاربران، ترافیک و سرور{% endblock %}
 {% block content %}
+<section class="view-page active">
+  <div class="system-ribbon" aria-label="وضعیت لحظه‌ای">
+    <span class="rail-id"><i></i> SYSTEM LIVE</span>
+    <span>XRAY: {% if xray_status %}ONLINE{% else %}OFFLINE{% endif %}</span>
+    <span>USERS: {{ stats.total_users }}</span>
+    <span>UPTIME: {{ server_info.uptime }}</span>
+  </div>
 
-<h1 class="page-title">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-    <span data-i18n="dashboard">داشبورد</span>
-</h1>
-
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="stat-value">{{ stats.total_users }}</div>
-        <div class="stat-label" data-i18n="total_users">کل کاربران</div>
+  <section class="hero">
+    <div class="hero-noise" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <div class="eyebrow"><i></i> COMMAND CENTER / LIVE</div>
+      <h1>کنترل کامل، با قدرت <span>آبی.</span></h1>
+      <p>وضعیت سرویس‌ها، کاربران و منابع سرور را از یک مرکز فرمان ساده و دقیق مدیریت کنید.</p>
+      <div class="command-chips">
+        <span><i class="pulse"></i>{% if xray_status %}هسته Xray فعال است{% else %}هسته Xray خاموش است{% endif %}</span>
+        <span>{{ stats.online_users }} کاربر آنلاین</span>
+        <span>آخرین بروزرسانی: اکنون</span>
+      </div>
     </div>
-
-    <div class="stat-card">
-        <div class="stat-icon-wrap" style="color: var(--success); background: rgba(16,255,176,0.1);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div class="stat-value">{{ stats.active_users }}</div>
-        <div class="stat-label" data-i18n="active_users">کاربر فعال</div>
+    <div class="hero-core" aria-hidden="true">
+      <div class="core-arc"></div><div class="core-orbit orbit-a"></div><div class="core-orbit orbit-b"></div>
+      <div class="core-center"><small>CORE STATUS</small><b>{% if xray_status %}ON{% else %}OFF{% endif %}</b><em>XRAY</em></div>
+      <span class="data-node node-a">CPU {{ server_info.cpu_percent|round|int }}%</span><span class="data-node node-b">RAM {{ server_info.ram_percent|round|int }}%</span><span class="data-node node-c">NET SECURE</span>
     </div>
+  </section>
 
-    <div class="stat-card">
-        <div class="stat-icon-wrap" style="color: var(--danger); background: rgba(255,72,118,0.1);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-        </div>
-        <div class="stat-value">{{ stats.disabled_users }}</div>
-        <div class="stat-label" data-i18n="disabled_users">غیرفعال</div>
-    </div>
+  <section class="metrics" aria-label="آمار کلیدی">
+    <article class="metric" data-index="01"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-users"/></svg></span><span class="metric-trend">TOTAL</span></div><strong>{{ stats.total_users }}</strong><label>کل کاربران</label></article>
+    <article class="metric" data-index="02"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-check"/></svg></span><span class="metric-trend">ACTIVE</span></div><strong>{{ stats.active_users }}</strong><label>کاربران فعال</label></article>
+    <article class="metric" data-index="03"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-power"/></svg></span><span class="metric-trend">ONLINE</span></div><strong>{{ stats.online_users }}</strong><label>آنلاین اکنون</label></article>
+    <article class="metric" data-index="04"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-chart"/></svg></span><span class="metric-trend">TRAFFIC</span></div><strong class="metric-traffic">{{ format_bytes(stats.total_traffic) }}</strong><label>ترافیک کل</label></article>
+  </section>
 
-    <div class="stat-card">
-        <div class="stat-icon-wrap" style="color: var(--warning); background: rgba(255,181,71,0.1);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="stat-value" style="font-size: 16px;">{{ format_bytes(stats.total_traffic) }}</div>
-        <div class="stat-label" data-i18n="total_traffic">ترافیک کل</div>
-    </div>
-</div>
+  <section class="grid">
+    <article class="panel">
+      <div class="panel-head"><h2>نمودار مصرف هفت روز اخیر</h2><span>GB / روز</span></div>
+      <div class="chart-wrap"><div class="chart-summary"><strong>{{ format_bytes(stats.total_traffic) }}</strong><small>مصرف ثبت‌شده</small></div><div class="chart"><canvas class="local-chart" data-chart="line" data-labels='{{ chart_labels|tojson }}' data-values='{{ chart_data|tojson }}' aria-label="نمودار مصرف هفت روز اخیر"></canvas></div><div class="axis chart-axis"></div></div>
+    </article>
+    <article class="panel">
+      <div class="panel-head"><h2>سلامت منابع سرور</h2><span>LIVE</span></div>
+      <div class="system">
+        <div class="system-row"><div class="sys-label"><span>پردازنده</span><b>{{ server_info.cpu_percent|round|int }}%</b></div><div class="bar"><i style="width:{{ server_info.cpu_percent }}%"></i></div></div>
+        <div class="system-row"><div class="sys-label"><span>حافظه RAM</span><b>{{ server_info.ram_percent|round|int }}%</b></div><div class="bar"><i style="width:{{ server_info.ram_percent }}%"></i></div></div>
+        <div class="system-row"><div class="sys-label"><span>فضای دیسک</span><b>{{ server_info.disk_percent|round|int }}%</b></div><div class="bar"><i style="width:{{ server_info.disk_percent }}%"></i></div></div>
+        <div class="core-card"><span class="core-ring"><svg><use href="#i-server"/></svg></span><div><b>{% if xray_status %}هسته شبکه عملیاتی است{% else %}هسته شبکه نیاز به بررسی دارد{% endif %}</b><small>مدت فعالیت سرور: {{ server_info.uptime }}</small></div></div>
+      </div>
+    </article>
+  </section>
 
-<div class="server-status">
-    {% if xray_status %}
-        <div class="status-text">
-            <span class="status-dot on"></span>
-            <span style="color: var(--success);" data-i18n="server_online">هسته Xray فعال است</span>
-        </div>
-    {% else %}
-        <div class="status-text">
-            <span class="status-dot off"></span>
-            <span style="color: var(--danger);" data-i18n="server_offline">هسته Xray خاموش است</span>
-        </div>
-    {% endif %}
-</div>
-
-<a href="/users/add" class="btn btn-primary btn-block">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    <span data-i18n="new_user">ساخت کاربر جدید</span>
-</a>
-
+  <section class="bottom-row">
+    <article class="panel"><div class="panel-head"><h2>پرمصرف‌ترین کاربران</h2><a href="/traffic">مشاهده گزارش</a></div><div class="users">
+      {% if top_users %}{% for user in top_users %}<div class="user"><span class="avatar">{{ user.username[:2]|upper }}</span><span><b>{{ user.username }}</b><small>{{ user.protocol|upper }} · {{ format_bytes(user.data_used) }}</small></span><em class="state">{% if user.status == 'active' %}فعال{% else %}غیرفعال{% endif %}</em></div>{% endfor %}
+      {% else %}<div class="dashboard-empty">هنوز مصرفی ثبت نشده است.</div>{% endif %}
+    </div></article>
+    <article class="panel"><div class="panel-head"><h2>دسترسی سریع</h2><span>مدیریت</span></div><div class="quick"><a href="/users/add"><svg><use href="#i-plus"/></svg><b>ساخت کاربر</b><small>سرویس جدید</small></a><a href="/users"><svg><use href="#i-users"/></svg><b>فهرست کاربران</b><small>ویرایش و کنترل</small></a><a href="/traffic"><svg><use href="#i-chart"/></svg><b>گزارش ترافیک</b><small>مصرف و رتبه‌بندی</small></a><a href="/settings"><svg><use href="#i-gear"/></svg><b>تنظیمات</b><small>امنیت و سرور</small></a></div></article>
+  </section>
+</section>
 {% endblock %}

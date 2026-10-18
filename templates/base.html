@@ -1,127 +1,89 @@
-<!DOCTYPE html>
-<html lang="fa" data-theme="dark">
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ panel_name }}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="icon" href="/static/logo.jpg" type="image/jpeg">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Poppins:wght@900&display=swap" rel="stylesheet">
-    
-    <style>
-        .logo, .nav-brand-text {
-            font-family: 'Russo One', 'Poppins', sans-serif !important;
-            font-weight: 900 !important;
-            font-size: 20px !important;
-            letter-spacing: 1.5px !important;
-            background: linear-gradient(to right, #ff007f 0%, #7f00ff 25%, #00f0ff 50%, #00ff7f 75%, #ff007f 100%) !important;
-            background-size: 200% auto !important;
-            -webkit-background-clip: text !important;
-            background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            color: transparent !important;
-            filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.4)) drop-shadow(0 0 15px rgba(0, 240, 255, 0.3));
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 6px !important;
-            animation: rgbFlow 4s linear infinite !important;
-        }
-        @keyframes rgbFlow {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-        .logo::after, .nav-brand-text::after {
-            content: "✦";
-            font-size: 14px;
-            color: #00f0ff;
-            text-shadow: 0 0 8px #00f0ff;
-            animation: sparkle 2s infinite;
-            -webkit-text-fill-color: #00f0ff !important;
-        }
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.3); }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#02060d">
+  <title>{% block title %}{{ panel_name }}{% endblock %}</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
-    {% if not hide_nav %}
-    <header class="header">
-        <div class="header-content">
-            <div class="brand-logo-wrap">
-                <img src="/static/logo.jpg" alt="Logo" class="panel-logo-img">
-                <span class="logo">{{ panel_name }}</span>
-            </div>
-            <div class="header-actions">
-                <button class="icon-btn" onclick="toggleLang()" title="Language">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                </button>
-                <button class="icon-btn" onclick="toggleTheme()" title="Theme">
-                    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
-                </button>
-                <button class="icon-btn" onclick="toggleMenu()" title="Menu">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                </button>
-            </div>
-        </div>
-    </header>
+<body data-page="{{ active_page|default('') }}">
+<div class="ambient" aria-hidden="true"></div>
+<svg class="icon-sprite" aria-hidden="true">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2.2a4 4 0 0 0-4-4H5.5a4 4 0 0 0-4 4V21M8.7 10.8a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22.5 21v-2.1a4 4 0 0 0-3-3.8M16.3 3a4 4 0 0 1 0 7.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v4M8 12h.01M16 12h.01M8 16h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19 14.5l1.4 1.1-2 3.4-1.7-.7a7.4 7.4 0 0 1-2.2 1.3l-.3 1.9H10l-.3-1.9a7.4 7.4 0 0 1-2.2-1.3l-1.7.7-2-3.4L5.2 14a7 7 0 0 1 0-2.5L3.8 10l2-3.4 1.7.7a7 7 0 0 1 2.2-1.3l.3-1.9h4.1l.3 1.9a7 7 0 0 1 2.2 1.3l1.7-.7 2 3.4-1.4 1.1a7 7 0 0 1 .1 3.4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM14 21h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M13.5 6.5 17.5 10.5M4 20l4.3-1 11-11a2.8 2.8 0 0 0-4-4l-11 11L4 20Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 3h6l1 4H8l1-4ZM6.5 7l1 14h9l1-14M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6.1 8.5A7 7 0 0 1 18.8 10M17.9 15.5A7 7 0 0 1 5.2 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a4.5 4.5 0 0 0 6.8.5l2.7-2.7a4.5 4.5 0 0 0-6.3-6.3L11.6 6M14 11a4.5 4.5 0 0 0-6.8-.5l-2.7 2.7a4.5 4.5 0 0 0 6.3 6.3l1.6-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="18" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.7 3.2 8 7.5 9.5 4.3-1.5 7.5-4.8 7.5-9.5V6L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m21 3-7.5 18-3.2-7.3L3 10.5 21 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m10.3 13.7 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M18.4 6.6a9 9 0 1 1-12.8 0M12 2v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
 
-    <div class="overlay" onclick="toggleMenu()"></div>
-    <nav class="nav-menu">
-        <div class="nav-brand">
-            <img src="/static/logo.jpg" alt="Logo">
-            <div>
-                <div class="nav-brand-text">{{ panel_name }}</div>
-                <div style="font-size: 11px; color: var(--text-muted);" data-i18n="panel_mgmt">مدیریت پنل</div>
-            </div>
-        </div>
-
-        <a href="/dashboard" class="nav-item {% if active_page == 'dashboard' %}active{% endif %}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            <span data-i18n="dashboard">داشبورد</span>
-        </a>
-        <a href="/users" class="nav-item {% if active_page == 'users' %}active{% endif %}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <span data-i18n="users">کاربران</span>
-        </a>
-        <a href="/users/add" class="nav-item {% if active_page == 'add' %}active{% endif %}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-            <span data-i18n="add_user">ساخت کاربر</span>
-        </a>
-        <a href="/traffic" class="nav-item {% if active_page == 'traffic' %}active{% endif %}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            <span data-i18n="traffic">مصرف ترافیک</span>
-        </a>
-        <a href="/telegram" class="nav-item {% if active_page == 'telegram' %}active{% endif %}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            <span data-i18n="telegram">بات تلگرام</span>
-        </a>
-        <a href="/settings" class="nav-item {% if active_page == 'settings' %}active{% endif %}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            <span data-i18n="settings">تنظیمات</span>
-        </a>
-        
-        <!-- دکمه پشتیبانی سازنده با آیدی تلگرام شما -->
-        <a href="https://t.me/Catwoman_ZaHra" target="_blank" class="nav-item" style="margin-top: auto; border-color: rgba(0, 136, 204, 0.3); background: rgba(0, 136, 204, 0.05); color: #0088cc;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <span data-i18n="creator_support">پشتیبانی سازنده</span>
-        </a>
-        
-        <a href="/logout" class="nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            <span data-i18n="logout">خروج</span>
-        </a>
-    </nav>
-    {% endif %}
-
-    <div class="container">
-        {% block content %}{% endblock %}
+<section class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="منوی اصلی">
+    <div class="brand">
+      <div class="brand-mark"><img src="/static/logo.webp" alt="لوگوی CatWoman"></div>
+      <div class="brand-name"><b>CatWoman</b><small>NEON CONTROL</small></div>
     </div>
+    <div class="side-command"><span><i></i> SECURE PANEL</span><b>24<small>/7</small></b></div>
+    <div class="nav-label"><span>سامانه اصلی</span><em>۶ ماژول</em></div>
+    <nav class="nav module-nav">
+      <a href="/dashboard" class="{% if active_page == 'dashboard' %}active{% endif %}"><span class="nav-beam"></span><span class="ico"><svg><use href="#i-grid"/></svg></span><span class="nav-copy"><b>داشبورد</b><small>نمای زنده سیستم</small></span><span class="nav-code">01</span></a>
+      <a href="/users" class="{% if active_page == 'users' %}active{% endif %}"><span class="nav-beam"></span><span class="ico"><svg><use href="#i-users"/></svg></span><span class="nav-copy"><b>کاربران</b><small>مدیریت سرویس‌ها</small></span><span class="nav-code">02</span></a>
+      <a href="/users/add" class="{% if active_page == 'add' %}active{% endif %}"><span class="nav-beam"></span><span class="ico"><svg><use href="#i-plus"/></svg></span><span class="nav-copy"><b>ساخت کاربر</b><small>راه‌اندازی سریع</small></span><span class="nav-code">03</span></a>
+      <a href="/traffic" class="{% if active_page == 'traffic' %}active{% endif %}"><span class="nav-beam"></span><span class="ico"><svg><use href="#i-chart"/></svg></span><span class="nav-copy"><b>مصرف ترافیک</b><small>تحلیل و گزارش</small></span><span class="nav-code">04</span></a>
+      <a href="/telegram" class="{% if active_page == 'telegram' %}active{% endif %}"><span class="nav-beam"></span><span class="ico"><svg><use href="#i-bot"/></svg></span><span class="nav-copy"><b>بات تلگرام</b><small>اعلان و مدیریت</small></span><span class="nav-code">05</span></a>
+      <a href="/settings" class="{% if active_page == 'settings' %}active{% endif %}"><span class="nav-beam"></span><span class="ico"><svg><use href="#i-gear"/></svg></span><span class="nav-copy"><b>تنظیمات</b><small>امنیت و سرور</small></span><span class="nav-code">06</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <a class="support" href="https://t.me/Catwoman_ZaHra" target="_blank" rel="noopener"><span class="signal"></span><div><b>پشتیبانی CatWoman</b><small>@Catwoman_ZaHra</small></div><span class="support-arrow">↗</span></a>
+      <a class="sidebar-logout" href="/logout"><svg><use href="#i-logout"/></svg><span>خروج امن</span></a>
+    </div>
+  </aside>
 
-    <script src="/static/app.js"></script>
-    {% block scripts %}{% endblock %}
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-button menu-toggle" type="button" data-menu-toggle aria-label="بازکردن منو" aria-controls="sidebar" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+      <div class="hello command-title"><span class="command-code"><i></i> CATWOMAN CONTROL</span><b>{% block header_title %}مرکز فرمان CatWoman{% endblock %}</b><small>{% block header_subtitle %}مدیریت امن شبکه و کاربران{% endblock %}</small></div>
+      <span class="demo-badge"><i></i> اتصال امن</span>
+      <a class="icon-button top-logout" href="/logout" title="خروج" aria-label="خروج"><svg><use href="#i-logout"/></svg></a>
+      <a class="primary-button" href="/users/add"><svg><use href="#i-plus"/></svg><span>کاربر جدید</span></a>
+    </header>
+    {% block content %}{% endblock %}
+  </main>
+
+  <nav class="mobile-nav" aria-label="دسترسی سریع">
+    <a href="/dashboard" class="{% if active_page == 'dashboard' %}active{% endif %}"><svg><use href="#i-grid"/></svg><span>خانه</span></a>
+    <a href="/users" class="{% if active_page == 'users' %}active{% endif %}"><svg><use href="#i-users"/></svg><span>کاربران</span></a>
+    <a href="/users/add" class="{% if active_page == 'add' %}active{% endif %}"><span class="mobile-create"><svg><use href="#i-plus"/></svg></span><span>ساخت</span></a>
+    <a href="/traffic" class="{% if active_page == 'traffic' %}active{% endif %}"><svg><use href="#i-chart"/></svg><span>ترافیک</span></a>
+    <a href="/telegram" class="{% if active_page == 'telegram' %}active{% endif %}"><svg><use href="#i-bot"/></svg><span>تلگرام</span></a>
+    <a href="/settings" class="{% if active_page == 'settings' %}active{% endif %}"><svg><use href="#i-gear"/></svg><span>تنظیمات</span></a>
+  </nav>
+  <button class="menu-scrim" type="button" data-menu-close aria-label="بستن منو"></button>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js" defer></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>

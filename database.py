@@ -3,7 +3,8 @@ import uuid
 import time
 import os
 
-DB_PATH = "/app/data/catwoman.db"
+DATA_DIR = os.getenv("DATA_DIR", "/app/data")
+DB_PATH = os.getenv("DB_PATH", os.path.join(DATA_DIR, "catwoman.db"))
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH, timeout=30)
@@ -11,7 +12,7 @@ def get_db_connection():
     return conn
 
 def init_db():
-    os.makedirs("/app/data", exist_ok=True)
+    os.makedirs(os.path.dirname(DB_PATH) or DATA_DIR, exist_ok=True)
     with get_db_connection() as conn:
         conn.execute("""
             CREATE TABLE IF NOT EXISTS users (
@@ -44,7 +45,7 @@ def init_db():
             conn.execute("ALTER TABLE users ADD COLUMN last_traffic_check REAL DEFAULT 0")
         except Exception:
             pass
-        
+
         # جدول آمار ترافیک روزانه
         conn.execute("""
             CREATE TABLE IF NOT EXISTS traffic_history (
@@ -72,7 +73,7 @@ def get_user_by_sub_token(token):
     with get_db_connection() as conn:
         return conn.execute("SELECT * FROM users WHERE sub_token = ?", (token,)).fetchone()
 
-def create_user(username, description, data_limit, expiry_days, protocol, 
+def create_user(username, description, data_limit, expiry_days, protocol,
                 flow, ip_limit, note, telegram_id, emoji):
     user_id = str(uuid.uuid4())[:8]
     user_uuid = str(uuid.uuid4())
@@ -80,7 +81,7 @@ def create_user(username, description, data_limit, expiry_days, protocol,
     created_at = int(time.time())
     expiry_date = int(time.time()) + (expiry_days * 86400) if expiry_days > 0 else 0
     data_limit_bytes = data_limit * 1073741824
-    
+
     with get_db_connection() as conn:
         conn.execute("""
             INSERT INTO users (id, username, description, data_limit, data_used,
@@ -97,7 +98,7 @@ def update_user(user_id, username, description, data_limit, expiry_days,
                 protocol, flow, ip_limit, note, telegram_id, emoji, status):
     expiry_date = int(time.time()) + (expiry_days * 86400) if expiry_days > 0 else 0
     data_limit_bytes = data_limit * 1073741824
-    
+
     with get_db_connection() as conn:
         conn.execute("""
             UPDATE users SET username=?, description=?, data_limit=?,
@@ -130,11 +131,11 @@ def update_traffic(user_id, bytes_used):
     """بروزرسانی ترافیک + ثبت آنلاین بودن"""
     now = int(time.time())
     with get_db_connection() as conn:
-        conn.execute("""UPDATE users SET 
-                        data_used = data_used + ?, 
+        conn.execute("""UPDATE users SET
+                        data_used = data_used + ?,
                         last_online = ?,
                         last_traffic_check = last_traffic_check + ?
-                        WHERE id = ?""", 
+                        WHERE id = ?""",
                      (bytes_used, now, bytes_used, user_id))
         conn.commit()
 
@@ -143,7 +144,7 @@ def get_online_users(threshold_seconds=60):
     threshold = int(time.time()) - threshold_seconds
     with get_db_connection() as conn:
         return conn.execute("""
-            SELECT * FROM users 
+            SELECT * FROM users
             WHERE last_online > ? AND status = 'active'
             ORDER BY last_online DESC
         """, (threshold,)).fetchall()
@@ -153,7 +154,7 @@ def get_online_count(threshold_seconds=60):
     threshold = int(time.time()) - threshold_seconds
     with get_db_connection() as conn:
         return conn.execute("""
-            SELECT COUNT(*) FROM users 
+            SELECT COUNT(*) FROM users
             WHERE last_online > ? AND status = 'active'
         """, (threshold,)).fetchone()[0]
 
@@ -176,11 +177,11 @@ def check_users_limits():
     now = int(time.time())
     with get_db_connection() as conn:
         conn.execute("""
-            UPDATE users SET status = 'data_exhausted' 
+            UPDATE users SET status = 'data_exhausted'
             WHERE data_limit > 0 AND data_used >= data_limit AND status = 'active'
         """)
         conn.execute("""
-            UPDATE users SET status = 'expired' 
+            UPDATE users SET status = 'expired'
             WHERE expiry_date > 0 AND expiry_date <= ? AND status = 'active'
         """, (now,))
         conn.commit()
@@ -200,7 +201,7 @@ def get_traffic_history(days=7):
     """دریافت تاریخچه ترافیک N روز اخیر"""
     with get_db_connection() as conn:
         return conn.execute("""
-            SELECT date, total_traffic FROM traffic_history 
+            SELECT date, total_traffic FROM traffic_history
             ORDER BY date DESC LIMIT ?
         """, (days,)).fetchall()
 

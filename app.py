@@ -29,7 +29,7 @@ async def periodic_check():
             collect_traffic_stats()
             check_users_limits()
             generate_xray_config()
-            
+
             # ثبت ترافیک روزانه
             stats = get_stats()
             record_daily_traffic(stats["total_traffic"])
@@ -42,12 +42,12 @@ async def lifespan(app: FastAPI):
     init_db()
     generate_xray_config()
     restart_xray()
-    
+
     # شروع ربات تلگرام
     tg_settings = get_telegram_settings()
     if tg_settings["enabled"] and tg_settings["token"]:
         bot_runner.start()
-    
+
     task = asyncio.create_task(periodic_check())
     yield
     task.cancel()
@@ -125,9 +125,16 @@ async def dashboard(request: Request):
         return RedirectResponse("/login")
     stats = get_stats()
     xray_status = is_xray_running()
+    server_info = get_server_info()
+    top_users = get_top_users(3)
+    history_7 = get_traffic_history(7)
+    chart_labels = [h["date"] for h in reversed(history_7)]
+    chart_data = [round(h["total_traffic"] / 1073741824, 2) for h in reversed(history_7)]
     return templates.TemplateResponse("dashboard.html", {
         "request": request, "panel_name": PANEL_NAME,
         "stats": stats, "xray_status": xray_status,
+        "server_info": server_info, "top_users": top_users,
+        "chart_labels": chart_labels, "chart_data": chart_data,
         "format_bytes": format_bytes, "active_page": "dashboard"
     })
 
@@ -168,13 +175,14 @@ async def add_user_action(
     protocol: str = Form("vless"),
     flow: str = Form(""),
     ip_limit: int = Form(0),
-    note: str = Form("")
+    note: str = Form(""),
+    telegram_id: str = Form("")
 ):
     if not is_logged_in(request):
         return RedirectResponse("/login")
     try:
         create_user(username, description, data_limit, expiry_days,
-                    protocol, flow, ip_limit, note, "", "")
+                    protocol, flow, ip_limit, note, telegram_id, "")
         generate_xray_config()
         restart_xray()
     except Exception as e:
@@ -195,7 +203,8 @@ async def edit_user_page(request: Request, user_id: str):
     return templates.TemplateResponse("edit_user.html", {
         "request": request, "panel_name": PANEL_NAME,
         "user": user, "remaining_days": remaining_days,
-        "data_limit_gb": data_limit_gb, "active_page": "users"
+        "data_limit_gb": data_limit_gb, "format_bytes": format_bytes,
+        "active_page": "users"
     })
 
 @app.post("/users/edit/{user_id}")
@@ -209,12 +218,13 @@ async def edit_user_action(
     flow: str = Form(""),
     ip_limit: int = Form(0),
     note: str = Form(""),
-    status: str = Form("active")
+    status: str = Form("active"),
+    telegram_id: str = Form("")
 ):
     if not is_logged_in(request):
         return RedirectResponse("/login")
     update_user(user_id, username, description, data_limit, expiry_days,
-                protocol, flow, ip_limit, note, "", "", status)
+                protocol, flow, ip_limit, note, telegram_id, "", status)
     generate_xray_config()
     restart_xray()
     return RedirectResponse("/users", status_code=303)
@@ -269,20 +279,20 @@ async def change_credentials(
 ):
     if not is_logged_in(request):
         return RedirectResponse("/login")
-    
+
     _, current = get_admin_credentials()
     if current_password != current:
         request.session["settings_error"] = "رمز فعلی اشتباه است!"
         return RedirectResponse("/settings", status_code=303)
-    
+
     if new_password != confirm_password:
         request.session["settings_error"] = "رمز جدید و تکرار آن یکسان نیست!"
         return RedirectResponse("/settings", status_code=303)
-    
+
     if len(new_password) < 4:
         request.session["settings_error"] = "رمز باید حداقل ۴ کاراکتر باشد!"
         return RedirectResponse("/settings", status_code=303)
-    
+
     update_admin_credentials(new_username, new_password)
     request.session["settings_success"] = "اطلاعات ادمین با موفقیت تغییر کرد!"
     return RedirectResponse("/settings", status_code=303)
@@ -343,12 +353,12 @@ async def save_telegram(
         return RedirectResponse("/login")
     is_enabled = enabled == "on"
     update_telegram_settings(token.strip(), admin_id.strip(), is_enabled)
-    
+
     if is_enabled and token:
         bot_runner.start()
     else:
         bot_runner.stop()
-    
+
     request.session["tg_success"] = "تنظیمات ربات ذخیره شد!"
     return RedirectResponse("/telegram", status_code=303)
 
@@ -372,21 +382,21 @@ async def test_telegram(
 async def traffic_page(request: Request):
     if not is_logged_in(request):
         return RedirectResponse("/login")
-    
+
     history_7 = get_traffic_history(7)
     history_30 = get_traffic_history(30)
     top_users = get_top_users(5)
     stats = get_stats()
-    
+
     # محاسبه مصرف امروز
     today_traffic = 0
     if history_7:
         today_traffic = history_7[0]["total_traffic"] if len(history_7) > 0 else 0
-    
+
     # تبدیل برای نمودار
     chart_labels = [h["date"] for h in reversed(history_7)]
     chart_data = [round(h["total_traffic"] / 1073741824, 2) for h in reversed(history_7)]
-    
+
     return templates.TemplateResponse("traffic.html", {
         "request": request, "panel_name": PANEL_NAME,
         "stats": stats, "today_traffic": today_traffic,
@@ -401,16 +411,16 @@ async def subscription(request: Request, token: str):
     user = get_user_by_sub_token(token)
     if not user:
         return PlainTextResponse("Not Found", status_code=404)
-    
+
     host = request.url.hostname
-    
+
     if user["status"] in ["disabled", "data_exhausted", "expired"]:
         reason = {
             "disabled": "سرویس شما به صورت موقت توسط ادمین غیرفعال شده است",
             "data_exhausted": "حجم اینترنت شما به پایان رسیده است",
             "expired": "تاریخ انقضای سرویس شما به پایان رسیده است"
         }.get(user["status"], "سرویس غیرفعال")
-        
+
         return templates.TemplateResponse("sub.html", {
             "request": request, "user": user, "config_link": "",
             "host": host, "format_bytes": format_bytes,
@@ -419,7 +429,7 @@ async def subscription(request: Request, token: str):
             "data_limit_gb": user["data_limit"] / 1073741824 if user["data_limit"] else 0,
             "usage_percent": min(100, (user["data_used"] / user["data_limit"] * 100) if user["data_limit"] else 0)
         })
-    
+
     config_link = generate_vless_link(user, host)
     return templates.TemplateResponse("sub.html", {
         "request": request, "user": user, "config_link": config_link,
@@ -435,11 +445,11 @@ async def subscription_raw(request: Request, token: str):
     user = get_user_by_sub_token(token)
     if not user or user["status"] != "active":
         return PlainTextResponse("", status_code=200)
-    
+
     host = request.url.hostname
     config_link = generate_vless_link(user, host)
     encoded = base64.b64encode(config_link.encode()).decode()
-    
+
     return Response(content=encoded, media_type="text/plain", headers={
         "Profile-Title": f"CatWoman - {user['username']}",
         "Subscription-Userinfo": f"upload=0; download={int(user['data_used'])}; total={int(user['data_limit'])}; expire={user['expiry_date']}"

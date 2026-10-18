@@ -1,49 +1,41 @@
-<!DOCTYPE html>
-<html lang="fa" data-theme="dark">
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - {{ panel_name }}</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="icon" href="/static/logo.jpg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#02060d">
+  <title>ورود — {{ panel_name }}</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
-    <div class="login-wrapper">
-        <div class="login-top-actions">
-            <button class="icon-btn" onclick="toggleLang()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            </button>
-            <button class="icon-btn" onclick="toggleTheme()">
-                <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
-            </button>
-        </div>
-
-        <div class="login-box">
-            <img src="/static/logo.jpg" alt="Logo" class="login-avatar-img">
-            <h1 class="login-title">{{ panel_name }}</h1>
-            <p class="login-subtitle" data-i18n="welcome">به پنل مدیریت خوش آمدید</p>
-
-            {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-            {% endif %}
-
-            <form method="POST" action="/login">
-                <div class="form-group">
-                    <label class="form-label" data-i18n="username">نام کاربری</label>
-                    <input type="text" name="username" class="form-control" required autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">رمز عبور</label>
-                    <input type="password" name="password" class="form-control" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                    <span data-i18n="login_btn">ورود به پنل</span>
-                </button>
-            </form>
-        </div>
+<body class="show-login login-page">
+<div class="ambient" aria-hidden="true"></div>
+<svg class="icon-sprite" aria-hidden="true">
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+</svg>
+<section class="login-view">
+  <div class="login-layout">
+    <div class="login-art">
+      <div class="orb"><img src="/static/logo.webp" alt="لوگوی CatWoman"></div>
+      <div class="login-art-copy"><div class="eyebrow"><i></i> SECURE ACCESS</div><h2>شب متعلق به <span>CatWoman</span> است.</h2><p>ورود امن به مرکز فرمان برای مدیریت کاربران، ترافیک و هسته شبکه.</p></div>
     </div>
-
-    <script src="/static/app.js"></script>
+    <div class="login-form">
+      <div class="login-mini"><img src="/static/logo.webp" alt="لوگوی CatWoman"><div><b>CATWOMAN</b><small>NEON CONTROL PANEL</small></div></div>
+      <h1>ورود به مرکز فرمان</h1><p>اطلاعات مدیریت پنل را وارد کنید.</p>
+      {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
+      <form method="post" action="/login" autocomplete="on">
+        <div class="field"><label for="username">نام کاربری</label><div class="input"><svg><use href="#i-user"/></svg><input id="username" name="username" required autocomplete="username" placeholder="نام کاربری" autofocus></div></div>
+        <div class="field"><label for="password">رمز عبور</label><div class="input"><svg><use href="#i-lock"/></svg><input id="password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••"><button class="password-toggle" type="button" data-password-toggle="password" aria-label="نمایش رمز"><svg><use href="#i-eye"/></svg></button></div></div>
+        <button class="login-submit" type="submit">ورود به مرکز فرمان</button>
+      </form>
+      <div class="secure"><svg><use href="#i-lock"/></svg> اتصال امن · CatWoman Panel</div>
+    </div>
+  </div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js" defer></script>
 </body>
 </html>

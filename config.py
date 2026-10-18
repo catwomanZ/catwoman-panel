@@ -1,8 +1,9 @@
 import os
 import json
 
-# مسیر فایل تنظیمات داینامیک
-SETTINGS_FILE = "/app/data/settings.json"
+# مسیر داده‌ها؛ مقدار پیش‌فرض Docker حفظ شده و برای توسعه/VPS قابل تنظیم است
+DATA_DIR = os.getenv("DATA_DIR", "/app/data")
+SETTINGS_FILE = os.getenv("SETTINGS_FILE", os.path.join(DATA_DIR, "settings.json"))
 
 # تنظیمات پیش‌فرض
 DEFAULT_SETTINGS = {
@@ -41,12 +42,12 @@ _settings = load_settings()
 ADMIN_USERNAME = _settings["admin_username"]
 ADMIN_PASSWORD = _settings["admin_password"]
 
-# کلید رمزنگاری سشن
-SECRET_KEY = "catwoman-super-secret-key-2024-navy-neon"
+# کلید رمزنگاری سشن (در محیط واقعی بهتر است با متغیر محیطی تنظیم شود)
+SECRET_KEY = os.getenv("SECRET_KEY", "catwoman-super-secret-key-2024-navy-neon")
 
 # تنظیمات Xray
-XRAY_CONFIG_PATH = "/usr/local/etc/xray/config.json"
-XRAY_BINARY_PATH = "/usr/local/bin/xray"
+XRAY_CONFIG_PATH = os.getenv("XRAY_CONFIG_PATH", "/usr/local/etc/xray/config.json")
+XRAY_BINARY_PATH = os.getenv("XRAY_BINARY_PATH", "/usr/local/bin/xray")
 
 # پورت داخلی
 PANEL_PORT = 8000

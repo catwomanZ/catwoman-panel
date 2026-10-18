@@ -1,110 +1,55 @@
 {% extends "base.html" %}
-{% block title %}Settings - {{ panel_name }}{% endblock %}
+{% block title %}تنظیمات — {{ panel_name }}{% endblock %}
+{% block header_title %}تنظیمات مرکز فرمان{% endblock %}
+{% block header_subtitle %}امنیت مدیر، سرور و نسخه‌های پشتیبان{% endblock %}
 {% block content %}
+<section class="view-page active">
+  <div class="page-intro"><div class="intro-copy"><div class="eyebrow"><i></i> MODULE 06 / SYSTEM VAULT</div><h1>تنظیمات مرکز فرمان</h1><p>اطلاعات ورود، سلامت سرور و پشتیبان‌گیری را مدیریت کنید.</p></div><div class="module-seal"><small>MODULE</small><b>06</b><em>SECURE</em></div></div>
+  {% if success %}<div class="alert alert-success" role="status"><svg><use href="#i-check"/></svg><span>{{ success }}</span></div>{% endif %}
+  {% if error %}<div class="alert alert-danger" role="alert"><svg><use href="#i-lock"/></svg><span>{{ error }}</span></div>{% endif %}
+  <div class="settings-shell">
+    <nav class="settings-tabs" aria-label="بخش‌های تنظیمات">
+      <button type="button" class="active" data-settings-tab="security"><svg><use href="#i-shield"/></svg><span><b>امنیت</b><small>ورود مدیر</small></span><em>01</em></button>
+      <button type="button" data-settings-tab="server"><svg><use href="#i-server"/></svg><span><b>سرور</b><small>هسته و منابع</small></span><em>02</em></button>
+      <button type="button" data-settings-tab="backup"><svg><use href="#i-database"/></svg><span><b>پشتیبان‌گیری</b><small>بکاپ و بازیابی</small></span><em>03</em></button>
+    </nav>
+    <div class="settings-content panel">
+      <section class="settings-pane active" data-settings-pane="security">
+        <div class="section-heading"><div><small>ACCESS SECURITY</small><h2>اطلاعات ورود مدیر</h2></div><span>حفاظت از پنل</span></div>
+        <div class="identity-card"><div class="identity-mark">CW</div><div><b>CatWoman Administrator</b><small>نام کاربری فعلی: {{ admin_username }}</small></div><span class="security-chip"><svg><use href="#i-lock"/></svg> امن</span></div>
+        <form method="post" action="/settings/change-credentials" class="settings-form">
+          <div class="form-grid">
+            <label class="control full"><span>رمز عبور فعلی *</span><div class="control-input"><svg><use href="#i-lock"/></svg><input id="currentPassword" type="password" name="current_password" required autocomplete="current-password"><button type="button" data-password-toggle="currentPassword" aria-label="نمایش رمز"><svg><use href="#i-eye"/></svg></button></div></label>
+            <label class="control full"><span>نام کاربری جدید *</span><div class="control-input"><svg><use href="#i-user"/></svg><input name="new_username" value="{{ admin_username }}" required autocomplete="username"></div></label>
+            <label class="control"><span>رمز عبور جدید *</span><div class="control-input"><svg><use href="#i-lock"/></svg><input id="newPassword" type="password" name="new_password" required minlength="4" autocomplete="new-password"><button type="button" data-password-toggle="newPassword" aria-label="نمایش رمز"><svg><use href="#i-eye"/></svg></button></div></label>
+            <label class="control"><span>تکرار رمز جدید *</span><div class="control-input"><svg><use href="#i-check"/></svg><input id="confirmPassword" type="password" name="confirm_password" required minlength="4" autocomplete="new-password"><button type="button" data-password-toggle="confirmPassword" aria-label="نمایش رمز"><svg><use href="#i-eye"/></svg></button></div></label>
+          </div>
+          <button class="forge-submit" type="submit"><svg><use href="#i-check"/></svg> ذخیره اطلاعات ورود</button>
+        </form>
+      </section>
 
-<h1 class="page-title">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    <span data-i18n="settings">تنظیمات</span>
-</h1>
+      <section class="settings-pane" data-settings-pane="server">
+        <div class="section-heading"><div><small>SERVER CORE</small><h2>سرور و شبکه</h2></div><span class="connected-label"><i></i> پایش زنده</span></div>
+        <div class="server-stack">
+          <div><span class="server-icon"><svg><use href="#i-server"/></svg></span><span><b>پردازنده</b><small>مصرف فعلی CPU</small></span><em>{{ server_info.cpu_percent|round|int }}%</em></div>
+          <div><span class="server-icon"><svg><use href="#i-database"/></svg></span><span><b>حافظه RAM</b><small>{{ format_bytes(server_info.ram_used) }} از {{ format_bytes(server_info.ram_total) }}</small></span><em>{{ server_info.ram_percent|round|int }}%</em></div>
+          <div><span class="server-icon"><svg><use href="#i-download"/></svg></span><span><b>فضای دیسک</b><small>{{ format_bytes(server_info.disk_used) }} از {{ format_bytes(server_info.disk_total) }}</small></span><em>{{ server_info.disk_percent|round|int }}%</em></div>
+          <div><span class="server-icon"><svg><use href="#i-power"/></svg></span><span><b>زمان فعالیت</b><small>از آخرین راه‌اندازی سرور</small></span><em>{{ server_info.uptime }}</em></div>
+        </div>
+        <div class="server-actions"><a href="/dashboard"><svg><use href="#i-refresh"/></svg> مشاهده وضعیت</a><a href="/settings/restart-xray" data-confirm="هسته Xray ری‌استارت شود؟ اتصال کاربران ممکن است چند ثانیه قطع شود."><svg><use href="#i-power"/></svg> ری‌استارت Xray</a></div>
+      </section>
 
-{% if success %}
-<div class="alert" style="background: rgba(16, 217, 160, 0.1); border: 1px solid var(--success); color: var(--success); padding: 12px; border-radius: 10px; margin-bottom: 15px;">
-    ✓ {{ success }}
-</div>
-{% endif %}
-{% if error %}
-<div class="alert alert-danger">⚠ {{ error }}</div>
-{% endif %}
-
-<!-- اطلاعات سرور -->
-<div class="form-section">
-    <div class="form-section-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-        اطلاعات سرور
+      <section class="settings-pane" data-settings-pane="backup">
+        <div class="section-heading"><div><small>DATA VAULT</small><h2>پشتیبان‌گیری و بازیابی</h2></div><span>دیتابیس CatWoman</span></div>
+        <div class="backup-hero"><div class="vault"><svg><use href="#i-database"/></svg><i></i></div><div><small>نسخه پشتیبان کامل</small><b>کاربران، تنظیمات و آمار مصرف</b><span>فایل با فرمت SQLite دریافت می‌شود.</span></div><em><svg><use href="#i-shield"/></svg> خصوصی</em></div>
+        <div class="backup-actions"><a class="page-action" href="/settings/backup"><svg><use href="#i-download"/></svg> دریافت بکاپ</a></div>
+        <form method="post" action="/settings/restore" enctype="multipart/form-data" class="restore-form" data-restore-form>
+          <label class="file-control"><input type="file" name="backup_file" accept=".db,application/x-sqlite3" required data-file-input><span class="file-icon"><svg><use href="#i-database"/></svg></span><span><b data-file-label>انتخاب فایل پشتیبان</b><small>فقط فایل دیتابیس معتبر CatWoman</small></span></label>
+          <div class="danger-note"><svg><use href="#i-lock"/></svg><span>بازیابی، دیتابیس فعلی را جایگزین می‌کند. قبل از ادامه یک بکاپ تازه بگیرید.</span></div>
+          <button class="danger-action" type="submit"><svg><use href="#i-refresh"/></svg> بازیابی اطلاعات</button>
+        </form>
+      </section>
     </div>
-    <div class="user-info">
-        <div class="info-item">
-            <div class="info-label">CPU</div>
-            <div class="info-value">{{ server_info.cpu_percent }}%</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">RAM</div>
-            <div class="info-value">{{ server_info.ram_percent }}%</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Disk</div>
-            <div class="info-value">{{ server_info.disk_percent }}%</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Uptime</div>
-            <div class="info-value" style="font-size: 12px;">{{ server_info.uptime }}</div>
-        </div>
-    </div>
-</div>
-
-<!-- تغییر اطلاعات ادمین -->
-<form method="POST" action="/settings/change-credentials">
-    <div class="form-section">
-        <div class="form-section-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            تغییر نام کاربری و رمز عبور
-        </div>
-        <div class="form-group">
-            <label class="form-label">رمز عبور فعلی *</label>
-            <input type="password" name="current_password" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">نام کاربری جدید *</label>
-            <input type="text" name="new_username" class="form-control" value="{{ admin_username }}" required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">رمز عبور جدید *</label>
-            <input type="password" name="new_password" class="form-control" required minlength="4">
-        </div>
-        <div class="form-group">
-            <label class="form-label">تکرار رمز جدید *</label>
-            <input type="password" name="confirm_password" class="form-control" required minlength="4">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            ذخیره تغییرات
-        </button>
-    </div>
-</form>
-
-<!-- مدیریت Xray -->
-<div class="form-section">
-    <div class="form-section-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-        مدیریت هسته Xray
-    </div>
-    <a href="/settings/restart-xray" class="btn btn-warning btn-block" onclick="return confirm('هسته Xray ری‌استارت شود؟')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-        ری‌استارت هسته Xray
-    </a>
-</div>
-
-<!-- پشتیبان‌گیری -->
-<div class="form-section">
-    <div class="form-section-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        پشتیبان‌گیری و بازیابی
-    </div>
-    <a href="/settings/backup" class="btn btn-success btn-block" style="margin-bottom: 10px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        دانلود پشتیبان دیتابیس
-    </a>
-    
-    <form method="POST" action="/settings/restore" enctype="multipart/form-data">
-        <div class="form-group" style="margin-top: 15px;">
-            <label class="form-label">بازیابی از فایل پشتیبان</label>
-            <input type="file" name="backup_file" class="form-control" accept=".db" required>
-        </div>
-        <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('⚠ همه داده‌های فعلی حذف میشن! ادامه؟')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
-            بازیابی دیتابیس
-        </button>
-    </form>
-</div>
-
+  </div>
+</section>
 {% endblock %}

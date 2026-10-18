@@ -1,137 +1,67 @@
 {% extends "base.html" %}
-{% block title %}Users - {{ panel_name }}{% endblock %}
+{% block title %}کاربران — {{ panel_name }}{% endblock %}
+{% block header_title %}مدیریت کاربران{% endblock %}
+{% block header_subtitle %}ساخت، ویرایش و کنترل سرویس‌ها{% endblock %}
 {% block content %}
+{% set active_count = users|selectattr('status','equalto','active')|list|length %}
+{% set disabled_count = (users|length) - active_count %}
+<section class="view-page active">
+  <div class="page-intro">
+    <div class="intro-copy"><div class="eyebrow"><i></i> MODULE 02 / USER DIRECTORY</div><h1>فهرست کاربران</h1><p>وضعیت سرویس، مصرف و دسترسی هر کاربر را مدیریت کنید.</p></div>
+    <div class="module-seal"><small>MODULE</small><b>02</b><em>USERS</em></div>
+    <a class="page-action" href="/users/add"><svg><use href="#i-plus"/></svg> ساخت کاربر</a>
+  </div>
 
-<h1 class="page-title">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    <span data-i18n="users">کاربران</span>
-</h1>
+  <div class="mini-metrics">
+    <article><span class="mini-icon"><svg><use href="#i-users"/></svg></span><div><small>کل کاربران</small><strong>{{ users|length }}</strong></div><em>TOTAL</em></article>
+    <article><span class="mini-icon"><svg><use href="#i-check"/></svg></span><div><small>سرویس فعال</small><strong>{{ active_count }}</strong></div><em>ACTIVE</em></article>
+    <article><span class="mini-icon"><svg><use href="#i-power"/></svg></span><div><small>آنلاین اکنون</small><strong id="onlineMetric">{{ online_count }}</strong></div><em>ONLINE</em></article>
+    <article><span class="mini-icon"><svg><use href="#i-lock"/></svg></span><div><small>غیرفعال یا پایان‌یافته</small><strong>{{ disabled_count }}</strong></div><em>OFFLINE</em></article>
+  </div>
 
-<!-- بخش کاربران آنلاین -->
-<div class="form-section" style="margin-bottom: 20px;">
-    <div class="form-section-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
-        <span>کاربران آنلاین</span>
-        <span id="onlineBadge" style="margin-right: auto; background: var(--success); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 800; box-shadow: 0 0 15px var(--success);">
-            {{ online_count }} آنلاین
-        </span>
+  <article class="panel data-panel">
+    <div class="data-toolbar">
+      <label class="search-box" for="userSearch"><svg><use href="#i-search"/></svg><input id="userSearch" type="search" placeholder="جستجو با نام کاربری یا توضیحات…" autocomplete="off"></label>
+      <div class="filter-chips" id="userFilters"><button type="button" class="active" data-filter="all">همه</button><button type="button" data-filter="online">آنلاین</button><button type="button" data-filter="active">فعال</button><button type="button" data-filter="disabled">غیرفعال</button></div>
+      <button class="tool-action" type="button" data-refresh-users><svg><use href="#i-refresh"/></svg><span>بروزرسانی</span></button>
     </div>
-    
-    {% if online_users %}
-    <div id="onlineUsersList" style="display: flex; flex-direction: column; gap: 8px;">
-        {% for user in online_users %}
-        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg-input); border-radius: 10px; border: 1px solid rgba(16, 217, 160, 0.3);">
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--success); box-shadow: 0 0 10px var(--success); animation: pulse-dot 2s infinite;"></span>
-            <div style="flex: 1; min-width: 0;">
-                <div style="font-weight: 700; color: var(--text-primary);">{{ user.username }}</div>
-                <div style="font-size: 11px; color: var(--text-muted);">{{ time_ago(user.last_online) }}</div>
-            </div>
-            <div style="font-size: 12px; color: var(--success); font-weight: 600;">{{ format_bytes(user.data_used) }}</div>
-        </div>
+    {% if users %}
+    <div class="table-scroll">
+      <table class="command-table" id="usersTable">
+        <thead><tr><th>کاربر</th><th>وضعیت</th><th>مصرف</th><th>اعتبار</th><th>پروتکل</th><th>عملیات</th></tr></thead>
+        <tbody>
+        {% for user in users %}
+          {% set is_online = user in online_users %}
+          {% set percent = ((user.data_used / user.data_limit * 100) if user.data_limit > 0 else 0)|round|int %}
+          <tr data-user-row data-search="{{ user.username|lower }} {{ user.description|default('', true)|lower }}" data-status="{{ user.status }}" data-online="{{ 'true' if is_online else 'false' }}">
+            <td data-label="کاربر"><div class="table-user"><span>{{ user.username[:2]|upper }}</span><div><b>{{ user.username }}</b><small>{{ user.description or ('شناسه ' ~ user.id[:8]) }}</small></div></div></td>
+            <td data-label="وضعیت">
+              {% if is_online %}<em class="table-state">آنلاین</em>
+              {% elif user.status == 'active' %}<em class="table-state">فعال</em>
+              {% elif user.status == 'expired' %}<em class="table-state expiring">منقضی</em>
+              {% elif user.status == 'data_exhausted' %}<em class="table-state expiring">حجم تمام</em>
+              {% else %}<em class="table-state disabled">غیرفعال</em>{% endif %}
+            </td>
+            <td data-label="مصرف"><div class="usage"><span><b>{{ format_bytes(user.data_used) }}</b> / {% if user.data_limit > 0 %}{{ format_bytes(user.data_limit) }}{% else %}∞{% endif %}</span><div><i style="width:{{ percent if percent < 100 else 100 }}%"></i></div></div></td>
+            <td data-label="اعتبار"><span class="date-cell">{% if user.expiry_date > 0 %}{{ days_remaining(user.expiry_date) }} روز{% else %}نامحدود{% endif %}</span><small>{{ time_ago(user.last_online) }}</small></td>
+            <td data-label="پروتکل"><span class="mono-cell">{{ user.protocol|upper }}</span></td>
+            <td data-label="عملیات"><div class="row-actions">
+              <a class="action-icon primary" href="/sub/{{ user.sub_token }}" target="_blank" title="صفحه اشتراک" aria-label="صفحه اشتراک"><svg><use href="#i-link"/></svg></a>
+              <a class="action-icon" href="/users/edit/{{ user.id }}" title="ویرایش" aria-label="ویرایش"><svg><use href="#i-edit"/></svg></a>
+              <a class="action-icon" href="/users/reset/{{ user.id }}" data-confirm="مصرف این کاربر صفر شود؟" title="صفرکردن مصرف" aria-label="صفرکردن مصرف"><svg><use href="#i-refresh"/></svg></a>
+              <a class="action-icon" href="/users/toggle/{{ user.id }}" data-confirm="وضعیت این کاربر تغییر کند؟" title="تغییر وضعیت" aria-label="تغییر وضعیت"><svg><use href="#i-power"/></svg></a>
+              <a class="action-icon danger" href="/users/delete/{{ user.id }}" data-confirm="این کاربر و تمام اطلاعاتش حذف شود؟" title="حذف" aria-label="حذف"><svg><use href="#i-trash"/></svg></a>
+            </div></td>
+          </tr>
         {% endfor %}
+        </tbody>
+      </table>
     </div>
+    <div class="empty-state" id="filteredEmpty"><svg><use href="#i-search"/></svg><b>کاربری پیدا نشد</b><small>عبارت جستجو یا فیلتر را تغییر دهید.</small></div>
+    <div class="table-foot"><span><b id="visibleUserCount">{{ users|length }}</b> کاربر نمایش داده می‌شود</span><a href="/users/add">+ سرویس جدید</a></div>
     {% else %}
-    <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 13px;">
-        در حال حاضر هیچ کاربری آنلاین نیست
-    </div>
+    <div class="empty-state static-empty"><svg><use href="#i-users"/></svg><b>هنوز کاربری ساخته نشده</b><small>اولین سرویس را از دکمه ساخت کاربر ایجاد کنید.</small><a class="page-action" href="/users/add"><svg><use href="#i-plus"/></svg> ساخت اولین کاربر</a></div>
     {% endif %}
-</div>
-
-<a href="/users/add" class="btn btn-primary btn-block" style="margin-bottom: 20px;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    <span data-i18n="new_user">ساخت کاربر جدید</span>
-</a>
-
-{% if users %}
-    {% for user in users %}
-    <div class="user-card">
-        <div class="user-head">
-            <div class="user-avatar">
-                <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed={{ user.username }}&backgroundColor=0a1230,00d4ff,4f8eff" alt="Avatar">
-            </div>
-            <div class="user-meta">
-                <span class="user-name">{{ user.username }}</span>
-                <div class="user-sub">{{ user.protocol|upper }} · {{ format_bytes(user.data_used) }}</div>
-            </div>
-            {% if user.status == 'active' %}
-                <span class="status-badge status-active">Active</span>
-            {% elif user.status == 'data_exhausted' %}
-                <span class="status-badge status-disabled">No Data</span>
-            {% elif user.status == 'expired' %}
-                <span class="status-badge status-disabled">Expired</span>
-            {% else %}
-                <span class="status-badge status-disabled">Disabled</span>
-            {% endif %}
-        </div>
-
-        {% if user.description %}
-        <div style="color: var(--text-secondary); font-size: 13px; margin-bottom: 10px; padding: 8px 12px; background: var(--bg-input); border-radius: 10px;">{{ user.description }}</div>
-        {% endif %}
-
-        <div class="user-info">
-            <div class="info-item">
-                <div class="info-label">Data Limit</div>
-                <div class="info-value">
-                    {% if user.data_limit > 0 %}{{ format_bytes(user.data_limit) }}{% else %}∞{% endif %}
-                </div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Used</div>
-                <div class="info-value">{{ format_bytes(user.data_used) }}</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Expires</div>
-                <div class="info-value">{{ days_remaining(user.expiry_date) }} d</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Protocol</div>
-                <div class="info-value">{{ user.protocol|upper }}</div>
-            </div>
-        </div>
-
-        {% if user.data_limit > 0 %}
-        <div class="progress">
-            {% set percent = (user.data_used / user.data_limit * 100)|round|int %}
-            <div class="progress-bar" style="width: {{ percent if percent < 100 else 100 }}%"></div>
-        </div>
-        {% endif %}
-
-        <div class="user-actions">
-            <a href="/sub/{{ user.sub_token }}" target="_blank" class="btn btn-primary" title="Subscription">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </a>
-            <a href="/users/edit/{{ user.id }}" class="btn btn-warning" title="Edit">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            </a>
-            <a href="/users/reset/{{ user.id }}" class="btn btn-success" title="Reset">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            </a>
-            <a href="/users/toggle/{{ user.id }}" class="btn btn-ghost" title="Toggle">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-            </a>
-            <a href="/users/delete/{{ user.id }}" class="btn btn-danger" title="Delete" onclick="return confirm('Delete this user?')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
-            </a>
-        </div>
-    </div>
-    {% endfor %}
-{% else %}
-    <div class="empty-state">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        <p data-i18n="no_users">هنوز کاربری ساخته نشده</p>
-    </div>
-{% endif %}
-
-<script>
-// آپدیت خودکار تعداد آنلاین هر 15 ثانیه
-setInterval(async () => {
-    try {
-        const res = await fetch('/api/online-count');
-        const data = await res.json();
-        const badge = document.getElementById('onlineBadge');
-        if (badge) badge.textContent = data.count + ' آنلاین';
-    } catch (e) {}
-}, 15000);
-</script>
-
+  </article>
+</section>
 {% endblock %}
