@@ -142,6 +142,16 @@ class UIContractTests(unittest.TestCase):
         self.assertNotIn("api.dicebear.com", content)
         self.assertNotIn("chart.js", content.lower())
 
+    def test_mobile_settings_submit_does_not_overlay_password_fields(self):
+        css = (STATIC / "style.css").read_text(encoding="utf-8")
+        self.assertIn(
+            ".settings-form .forge-submit{position:static;bottom:auto;z-index:auto;margin-top:20px}",
+            css,
+        )
+        self.assertNotIn(".settings-form .forge-submit{position:sticky", css)
+        source = (TEMPLATES / "settings.html").read_text(encoding="utf-8")
+        self.assertLess(source.index('name="confirm_password"'), source.index("ذخیره اطلاعات ورود"))
+
 
 if __name__ == "__main__":
     unittest.main()
